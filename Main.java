@@ -1,44 +1,43 @@
-import java.util.Scanner;
+interface Flyable {
+    void fly();
+}
 
-class result {
-    double num1;
-    double num2;
-    double num3;
-    double total_num;
-
-    result(double num1, double num2, double num3) {
-        this.num1 = num1;
-        this.num2 = num2;
-        this.num3 = num3;
+class Bird implements Flyable {
+    public void fly() {
+        System.out.println("Bird is flying");
     }
 
-    void total_result() {
-        total_num = num1 + num2 + num3;
-        System.out.println(total_num);
+    void buildNest() {
+        System.out.println("Bird is building a nest");
+    }
+}
 
-        if (total_num > 80) {
-            System.out.println("Result: Pass");
-        } else {
-            System.out.println("Result: Fail");
-        }
+class Airplane implements Flyable {
+    public void fly() {
+        System.out.println("Airplane is flying");
+    }
+
+    void land() {
+        System.out.println("Airplane is landing");
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Flyable[] flyables = { new Bird(), new Airplane() };
 
-        System.out.print("Enter first number: ");
-        double num1 = scanner.nextDouble();
+        for (Flyable f : flyables) {
+            f.fly();
+        }
 
-        System.out.print("Enter second number: ");
-        double num2 = scanner.nextDouble();
-
-        System.out.print("Enter third number: ");
-        double num3 = scanner.nextDouble();
-
-        result ch = new result(num1, num2, num3);
-        ch.total_result();
+        for (Flyable f : flyables) {
+            if (f instanceof Bird) {
+                Bird b = (Bird) f;
+                b.buildNest();
+            } else if (f instanceof Airplane) {
+                Airplane a = (Airplane) f;
+                a.land();
+            }
+        }
     }
 }
-
